@@ -38,7 +38,7 @@ namespace PVcase.Services
         public double GetPanelWidth(SolarPanel panel)
         {
             if (panel.TiltAngle == 0)
-                return panel.TiltAngle;
+                return panel.Width;
 
             double radians = (Math.PI / 180) * panel.TiltAngle;
             return panel.Width * Math.Abs(Math.Cos(radians));
