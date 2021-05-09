@@ -1,29 +1,24 @@
-﻿using PVcase.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using PVcase.Models;
 
 namespace PVcase.Services
 {
     public class ZoneCalculations
     {
-        public SiteCoordRange GetRange(int[,] coordinates)
+        public SiteCoordRange GetRange(List<Point> coordinates)
         {
-            var siteCoords = new SiteCoordRange();
-
-            for (int i = 0; i < coordinates.GetLength(0); ++i)
+            var siteCoords = new SiteCoordRange
             {
-                if (siteCoords.MaxX < coordinates[i, 0])
-                    siteCoords.MaxX = coordinates[i, 0];
-
-                if (siteCoords.MinX > coordinates[i, 0])
-                    siteCoords.MinX = coordinates[i, 0];
-
-                if (siteCoords.MaxY < coordinates[i, 1])
-                    siteCoords.MaxY = coordinates[i, 1];
-
-                if (siteCoords.MinY > coordinates[i, 1])
-                    siteCoords.MinY = coordinates[i, 1];
-            }
+                MaxX = coordinates.Max(p => p.X),
+                MaxY = coordinates.Max(p => p.Y),
+                MinX = coordinates.Min(p => p.X),
+                MinY = coordinates.Min(p => p.Y)
+            };
 
             return siteCoords;
         }
+
     }
 }

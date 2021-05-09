@@ -4,10 +4,10 @@ namespace PVcase.Models
 {
     public class SiteCoordRange
     {
-        public int MinX { get; set; }
-        public int MaxX { get; set; }
-        public int MinY { get; set; }
-        public int MaxY { get; set; }
+        public double MinX { get; set; }
+        public double MaxX { get; set; }
+        public double MinY { get; set; }
+        public double MaxY { get; set; }
 
 
         public SiteCoordRange()
