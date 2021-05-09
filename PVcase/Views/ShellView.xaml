@@ -169,7 +169,7 @@
                  TextWrapping="Wrap"
                  Text="{Binding Path=TiltAngle, Mode=TwoWay}"
                  DataContext="{Binding Path=SolarPanel}"
-                 PreviewTextInput="ValidateOnlyNumbers"/>
+                 PreviewTextInput="LimitTiltAngle"/>
 
         <Button x:Name="DrawSolarPanels"
                 Content="Generate"
