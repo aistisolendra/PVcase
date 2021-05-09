@@ -28,10 +28,7 @@ namespace PVcase.Services
                 var start = points[i];
                 var end = new Point();
 
-                if (i != points.Count - 1)
-                    end = points[i + 1];
-                else
-                    end = points[0];
+                end = i != points.Count - 1 ? points[i + 1] : points[0];
 
                 var line = new Line(start, end);
                 linesList.Add(line);

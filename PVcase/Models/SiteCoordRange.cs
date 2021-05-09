@@ -1,4 +1,4 @@
-﻿using System;
+﻿using static System.Int32;
 
 namespace PVcase.Models
 {
@@ -12,10 +12,10 @@ namespace PVcase.Models
 
         public SiteCoordRange()
         {
-            MinX = Int32.MaxValue;
-            MaxX = Int32.MinValue;
-            MinY = Int32.MaxValue;
-            MaxY = Int32.MinValue;
+            MinX = MaxValue;
+            MaxX = MinValue;
+            MinY = MaxValue;
+            MaxY = MinValue;
         }
     }
 }
