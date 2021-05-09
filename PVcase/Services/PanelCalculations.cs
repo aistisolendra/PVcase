@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using PVcase.Models;
 
@@ -54,34 +55,20 @@ namespace PVcase.Services
                 new Point(solarPanel.OriginPoint.X + solarPanel.Length, solarPanel.OriginPoint.Y + solarPanel.Width)
             };
 
-            if (IsAnyPointInside(panelPoints, restrictionPoints))
-                return false;
-
-            return IsAllPointsInside(panelPoints, sitePoints);
+            return !IsAnyPointInside(panelPoints, restrictionPoints) &&
+                   IsAllPointsInside(panelPoints, sitePoints);
         }
 
 
         public bool IsAllPointsInside(List<Point> testPoints, List<Point> polygonPoints)
         {
-            foreach (var point in testPoints)
-            {
-                if (IsPointInside(polygonPoints, point) == false)
-                    return false;
-            }
-
-            return true;
+            return testPoints.All(point => IsPointInside(polygonPoints, point) != false);
         }
 
 
         public bool IsAnyPointInside(List<Point> testPoints, List<Point> polygonPoints)
         {
-            foreach (var point in testPoints)
-            {
-                if (IsPointInside(polygonPoints, point))
-                    return true;
-            }
-
-            return false;
+            return testPoints.Any(point => IsPointInside(polygonPoints, point));
         }
 
         public static bool IsPointInside(List<Point> polygon, Point testPoint)
