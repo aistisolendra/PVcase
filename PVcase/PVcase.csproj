@@ -76,8 +76,9 @@
     <Compile Include="Coordinates\Site.cs" />
     <Compile Include="Models\SiteCoordRange.cs" />
     <Compile Include="Models\SolarPanel.cs" />
+    <Compile Include="Services\FileReader.cs" />
     <Compile Include="Services\PanelCalculations.cs" />
-    <Compile Include="Services\Convertion.cs" />
+    <Compile Include="Services\Converter.cs" />
     <Compile Include="Services\TextParser.cs" />
     <Compile Include="Services\ZoneCalculations.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />

@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using Caliburn.Micro;
-using PVcase.Coordinates;
 using PVcase.Models;
 using PVcase.Services;
 
@@ -8,20 +9,34 @@ namespace PVcase.ViewModels
 {
     public class ShellViewModel : Screen
     {
-        public Convertion Convertion = new Convertion();
+        public Converter Converter = new Converter();
         public PanelCalculations PanelService = new PanelCalculations();
         public ZoneCalculations ZoneService = new ZoneCalculations();
-
+        public FileReader FileReader = new FileReader();
         public ShellViewModel()
         {
             CreateMenuPanel();
-            DrawSite();
-            DrawRestriction();
         }
 
         public void CreateMenuPanel()
         {
             SolarPanel = new SolarPanel();
+        }
+
+        public void Generate()
+        {
+            DrawZones();
+            DrawSolarPanels();
+        }
+
+        public void OpenSiteFile()
+        {
+            _siteZonePoints = FileReader.PointsFromFile();
+        }
+
+        public void OpenRestrictionFile()
+        {
+            _restrictionZonePoints = FileReader.PointsFromFile();
         }
 
         public void ResetMenuPanel()
@@ -33,51 +48,36 @@ namespace PVcase.ViewModels
             SolarPanel.TiltAngle = 0;
         }
 
-        public void DrawSite()
+        public void DrawZones()
         {
-            var siteCoordinationLines = Convertion.CoordinatesToLines(Site.Coordinates);
-
-            foreach (var line in siteCoordinationLines)
-            {
-                SiteLines.Add(line);
-            }
-        }
-
-        public void DrawRestriction()
-        {
-            var zoneCoordinationLines = Convertion.CoordinatesToLines(RestrictionZone.Coordinates);
-
-            foreach (var line in zoneCoordinationLines)
-            {
-                RestrictionLines.Add(line);
-            }
+            SiteLines.AddRange(Converter.PointsToLines(_siteZonePoints));
+            RestrictionLines.AddRange(Converter.PointsToLines(_restrictionZonePoints));
         }
 
         public void DrawSolarPanels()
         {
             SolarPanels.Clear();
+            var panelPlacingPoints = PanelService.GetPlacingPoints(SolarPanel, _siteZonePoints, _restrictionZonePoints);
 
-            var sitePoints = Convertion.CoordinatesToPoints(Site.Coordinates);
-            var restrictionPoints = Convertion.CoordinatesToPoints(RestrictionZone.Coordinates);
-            var siteBorders = ZoneService.GetRange(Site.Coordinates);
-
-            var originPoints = PanelService.GetPanelPoints(SolarPanel, siteBorders, sitePoints, restrictionPoints);
-
-            foreach (var point in originPoints)
+            foreach (var panel in panelPlacingPoints.Select(CreateNewSolarPanel))
             {
-                var panel = new SolarPanel()
-                {
-                    OriginPoint = new Point(point.X, point.Y),
-                    Length = SolarPanel.Width,
-                    Width = SolarPanel.Length
-                };
-
                 SolarPanels.Add(panel);
             }
-
+            
             ResetMenuPanel();
         }
 
+        private SolarPanel CreateNewSolarPanel(Point point)
+        {
+            var panel = new SolarPanel()
+            {
+                OriginPoint = new Point(point.X, point.Y),
+                Length = SolarPanel.Width,
+                Width = SolarPanel.Length
+            };
+
+            return panel;
+        }
 
         private BindableCollection<SolarPanel> _solarPanels = new BindableCollection<SolarPanel>();
         public BindableCollection<SolarPanel> SolarPanels
@@ -101,11 +101,13 @@ namespace PVcase.ViewModels
         }
 
         private SolarPanel _solarPanel;
-
         public SolarPanel SolarPanel
         {
             get => _solarPanel;
             set => _solarPanel = value;
         }
+
+        private List<Point> _siteZonePoints;
+        private List<Point> _restrictionZonePoints;
     }
 }

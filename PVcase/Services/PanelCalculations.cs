@@ -8,11 +8,12 @@ namespace PVcase.Services
 {
     public class PanelCalculations
     {
-        public List<Point> GetPanelPoints(SolarPanel panel, SiteCoordRange siteRange,
-                                          List<Point> siteCoordinationPoints, List<Point> restrictionCoordinationPoints)
+        private readonly ZoneCalculations _zoneCalculations = new ZoneCalculations();
+        public List<Point> GetPlacingPoints(SolarPanel panel, List<Point> siteCoordinationPoints, List<Point> restrictionCoordinationPoints)
         {
             var allOriginPoints = new List<Point>();
             panel.Width = GetPanelWidth(panel);
+            var siteRange = _zoneCalculations.GetRange(siteCoordinationPoints);
 
             for (double y = siteRange.MinY; y < siteRange.MaxY; ++y)
             {
