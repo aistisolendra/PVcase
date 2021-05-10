@@ -8,6 +8,9 @@ namespace PVcase.Services
     {
         public SiteCoordRange GetRange(List<Point> coordinates)
         {
+            if (coordinates.Count == 0)
+                return null;
+
             var siteCoords = new SiteCoordRange
             {
                 MaxX = coordinates.Max(p => p.X),
@@ -18,6 +21,5 @@ namespace PVcase.Services
 
             return siteCoords;
         }
-
     }
 }
