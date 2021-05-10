@@ -113,7 +113,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>
@@ -121,8 +120,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="TestFiles\RestrictionZoneCoordinates.txt" />
-    <Resource Include="TestFiles\SiteCoordinates.txt" />
+    <Resource Include="ExampleFiles\RestrictionZoneCoordinates.txt" />
+    <Resource Include="ExampleFiles\SiteCoordinates.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
