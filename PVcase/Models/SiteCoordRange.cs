@@ -1,8 +1,9 @@
-﻿using static System.Int32;
+﻿using System;
+using static System.Int32;
 
 namespace PVcase.Models
 {
-    public class SiteCoordRange
+    public class SiteCoordRange : IEquatable<SiteCoordRange>
     {
         public double MinX { get; set; }
         public double MaxX { get; set; }
@@ -16,6 +17,15 @@ namespace PVcase.Models
             MaxX = MinValue;
             MinY = MaxValue;
             MaxY = MinValue;
+        }
+
+        public bool Equals(SiteCoordRange other)
+        {
+            return other != null &&
+                   this.MinX == other.MinX &&
+                   this.MaxX == other.MaxX &&
+                   this.MinY == other.MinY &&
+                   this.MaxY == other.MaxY;
         }
     }
 }
