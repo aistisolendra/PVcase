@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Windows;
 using Microsoft.Win32;
+using PVcase.Models;
 
 namespace PVcase.Services
 {

@@ -29,7 +29,7 @@ namespace PVcase
             _container.PerRequest<FileReader>();
             _container.PerRequest<PanelCalculations>();
             _container.PerRequest<ZoneCalculations>();
-
+            _container.PerRequest<Converter>();
             base.Configure();
         }
 

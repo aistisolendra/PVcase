@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 
 namespace PVcase.Models
 {
@@ -63,8 +62,11 @@ namespace PVcase.Models
         }
 
         public SolarPanel(double width = 0, double length = 0, int rowSpacing = 0,
-            int columnSpacing = 0, int tiltAngle = 0, Point originPoint = new Point())
+            int columnSpacing = 0, int tiltAngle = 0, Point originPoint = null)
         {
+            if (originPoint == null)
+                originPoint = new Point();
+
             OriginPoint = originPoint;
             Length = length;
             Width = width;

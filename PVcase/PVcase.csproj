@@ -72,6 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Line.cs" />
+    <Compile Include="Models\Point.cs" />
     <Compile Include="Models\SiteCoordRange.cs" />
     <Compile Include="Models\SolarPanel.cs" />
     <Compile Include="Services\FileReader.cs" />

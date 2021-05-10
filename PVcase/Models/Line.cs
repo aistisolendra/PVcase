@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace PVcase.Models
+﻿namespace PVcase.Models
 {
     public class Line
     {
