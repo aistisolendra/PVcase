@@ -1,6 +1,8 @@
-﻿namespace PVcase.Models
+﻿using System;
+
+namespace PVcase.Models
 {
-    public class Point
+    public class Point : IEquatable<Point>
     {
         public double X { get; set; }
         public double Y { get; set; }
@@ -15,6 +17,11 @@
         {
             X = 0;
             Y = 0;
+        }
+
+        public bool Equals(Point other)
+        {
+            return other != null && other.X == this.X && other.Y == this.Y;
         }
     }
 }
