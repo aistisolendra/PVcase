@@ -15,19 +15,23 @@ namespace PVcase.Services
             using (var sr = new StreamReader(path))
             {
                 string line;
+
                 while ((line = sr.ReadLine()) != null)
-                {
-                    string[] values = line.Split(_delimiters);
-
-                    int.TryParse(values[0], out int x);
-                    int.TryParse(values[1], out int y);
-
-                    var point = new Point(x, y);
-                    coordinates.Add(point);
-                }
+                    coordinates.Add(CreateNewPoint(line));
             }
 
             return coordinates;
+        }
+
+        private Point CreateNewPoint(string line)
+        {
+            string[] values = line.Split(_delimiters);
+
+            int.TryParse(values[0], out int x);
+            int.TryParse(values[1], out int y);
+
+            var point = new Point(x, y);
+            return point;
         }
 
         public List<Point> PointsFromFile()
