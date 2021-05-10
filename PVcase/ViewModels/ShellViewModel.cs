@@ -9,12 +9,15 @@ namespace PVcase.ViewModels
 {
     public class ShellViewModel : Screen
     {
-        public Converter Converter = new Converter();
-        public PanelCalculations PanelService = new PanelCalculations();
-        public ZoneCalculations ZoneService = new ZoneCalculations();
-        public FileReader FileReader = new FileReader();
-        public ShellViewModel()
+        private readonly Converter _converter;
+        private readonly PanelCalculations _panelCalculations;
+        private readonly FileReader _fileReader;
+        public ShellViewModel(Converter converter, PanelCalculations panelCalculations, FileReader fileReader)
         {
+            _converter = converter;
+            _panelCalculations = panelCalculations;
+            _fileReader = fileReader;
+
             CreateMenuPanel();
         }
 
@@ -31,12 +34,12 @@ namespace PVcase.ViewModels
 
         public void OpenSiteFile()
         {
-            _siteZonePoints = FileReader.PointsFromFile();
+            _siteZonePoints = _fileReader.PointsFromFile();
         }
 
         public void OpenRestrictionFile()
         {
-            _restrictionZonePoints = FileReader.PointsFromFile();
+            _restrictionZonePoints = _fileReader.PointsFromFile();
         }
 
         public void ResetMenuPanel()
@@ -50,14 +53,14 @@ namespace PVcase.ViewModels
 
         public void DrawZones()
         {
-            SiteLines.AddRange(Converter.PointsToLines(_siteZonePoints));
-            RestrictionLines.AddRange(Converter.PointsToLines(_restrictionZonePoints));
+            SiteLines.AddRange(_converter.PointsToLines(_siteZonePoints));
+            RestrictionLines.AddRange(_converter.PointsToLines(_restrictionZonePoints));
         }
 
         public void DrawSolarPanels()
         {
             SolarPanels.Clear();
-            var panelPlacingPoints = PanelService.GetPlacingPoints(SolarPanel, _siteZonePoints, _restrictionZonePoints);
+            var panelPlacingPoints = _panelCalculations.GetPlacingPoints(SolarPanel, _siteZonePoints, _restrictionZonePoints);
 
             foreach (var panel in panelPlacingPoints.Select(CreateNewSolarPanel))
             {
