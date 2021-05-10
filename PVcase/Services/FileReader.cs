@@ -7,31 +7,49 @@ namespace PVcase.Services
 {
     public class FileReader
     {
-        private readonly char[] _delimiters = { ',', '.', ';', ':' };
+        private readonly char[] _delimiters = { ',', ';', ':' };
         public List<Point> ReadFromFile(string path)
         {
             var coordinates = new List<Point>();
+
+            if (!File.Exists(path))
+                return coordinates;
 
             using (var sr = new StreamReader(path))
             {
                 string line;
 
                 while ((line = sr.ReadLine()) != null)
-                    coordinates.Add(CreateNewPoint(line));
+                {
+                    var point = CreateNewPoint(line);
+
+                    if (point != null)
+                        coordinates.Add(point);
+                }
             }
 
             return coordinates;
         }
 
-        private Point CreateNewPoint(string line)
+        public Point CreateNewPoint(string line)
         {
             string[] values = line.Split(_delimiters);
 
-            int.TryParse(values[0], out int x);
-            int.TryParse(values[1], out int y);
+            if (values.Length <= 1 || values.Length > 2)
+                return null;
 
-            var point = new Point(x, y);
-            return point;
+            return ValueParseCheck(values);
+        }
+
+        public Point ValueParseCheck(string[] values)
+        {
+            bool xResult = double.TryParse(values[0], out double x);
+            bool yResult = double.TryParse(values[1], out double y);
+
+            if (xResult && yResult)
+                return new Point(x, y);
+
+            return null;
         }
 
         public List<Point> PointsFromFile()
