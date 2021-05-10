@@ -11,11 +11,14 @@ namespace PVcase.ViewModels
         private readonly Converter _converter;
         private readonly PanelCalculations _panelCalculations;
         private readonly FileReader _fileReader;
-        public ShellViewModel(Converter converter, PanelCalculations panelCalculations, FileReader fileReader)
+        private readonly ZoneCalculations _zoneCalculations;
+        public ShellViewModel(Converter converter, PanelCalculations panelCalculations,
+                              FileReader fileReader, ZoneCalculations zoneCalculations)
         {
             _converter = converter;
             _panelCalculations = panelCalculations;
             _fileReader = fileReader;
+            _zoneCalculations = zoneCalculations;
 
             CreateMenuPanel();
         }
@@ -51,7 +54,7 @@ namespace PVcase.ViewModels
         public void DrawSolarPanels()
         {
             SolarPanels.Clear();
-            var panelPlacingPoints = _panelCalculations.GetPlacingPoints(SolarPanelData, _siteZonePoints, _restrictionZonePoints);
+            var panelPlacingPoints = _panelCalculations.GetPlacingPoints(SolarPanelData, _siteZonePoints, _restrictionZonePoints, _zoneCalculations);
 
             foreach (var panel in panelPlacingPoints.Select(CreateNewSolarPanel))
             {

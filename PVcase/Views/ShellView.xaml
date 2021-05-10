@@ -122,7 +122,7 @@
                  Grid.ColumnSpan="2"
                  TextWrapping="Wrap"
                  Text="{Binding Path=Width, Mode=TwoWay}"
-                 DataContext="{Binding Path=SolarPanel}"
+                 DataContext="{Binding Path=SolarPanelData}"
                  PreviewTextInput="ValidateOnlyNumbers"/>
 
         <Label x:Name="Length"
@@ -137,7 +137,7 @@
                  Grid.ColumnSpan="2"
                  TextWrapping="Wrap"
                  Text="{Binding Path=Length, Mode=TwoWay}"
-                 DataContext="{Binding Path=SolarPanel}"
+                 DataContext="{Binding Path=SolarPanelData}"
                  PreviewTextInput="ValidateOnlyNumbers"/>
 
         <Label x:Name="RowSpacing"
@@ -152,7 +152,7 @@
                  Grid.ColumnSpan="2"
                  TextWrapping="Wrap"
                  Text="{Binding Path=RowSpacing, Mode=TwoWay}"
-                 DataContext="{Binding Path=SolarPanel}"
+                 DataContext="{Binding Path=SolarPanelData}"
                  PreviewTextInput="ValidateOnlyNumbers"/>
 
         <Label x:Name="ColumnSpacing"
@@ -167,7 +167,7 @@
                  Grid.ColumnSpan="2"
                  TextWrapping="Wrap"
                  Text="{Binding Path=ColumnSpacing, Mode=TwoWay}"
-                 DataContext="{Binding Path=SolarPanel}"
+                 DataContext="{Binding Path=SolarPanelData}"
                  PreviewTextInput="ValidateOnlyNumbers"/>
 
         <Label x:Name="TiltAngle"
@@ -182,7 +182,7 @@
                  Grid.ColumnSpan="2"
                  TextWrapping="Wrap"
                  Text="{Binding Path=TiltAngle, Mode=TwoWay}"
-                 DataContext="{Binding Path=SolarPanel}"
+                 DataContext="{Binding Path=SolarPanelData}"
                  PreviewTextInput="LimitTiltAngle"/>
 
         <Button x:Name="Generate"
