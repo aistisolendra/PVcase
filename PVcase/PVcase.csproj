@@ -120,5 +120,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="TestFiles\RestrictionZoneCoordinates.txt" />
+    <Resource Include="TestFiles\SiteCoordinates.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
