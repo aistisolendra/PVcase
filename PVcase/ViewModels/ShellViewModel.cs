@@ -22,7 +22,7 @@ namespace PVcase.ViewModels
 
         public void CreateMenuPanel()
         {
-            SolarPanel = new SolarPanel();
+            SolarPanelData = new SolarPanel();
         }
 
         public void Generate()
@@ -41,10 +41,6 @@ namespace PVcase.ViewModels
             _restrictionZonePoints = _fileReader.PointsFromFile();
         }
 
-        public void ResetMenuPanel()
-        {
-            SolarPanel.ResetPanel();
-        }
 
         public void DrawZones()
         {
@@ -55,14 +51,14 @@ namespace PVcase.ViewModels
         public void DrawSolarPanels()
         {
             SolarPanels.Clear();
-            var panelPlacingPoints = _panelCalculations.GetPlacingPoints(SolarPanel, _siteZonePoints, _restrictionZonePoints);
+            var panelPlacingPoints = _panelCalculations.GetPlacingPoints(SolarPanelData, _siteZonePoints, _restrictionZonePoints);
 
             foreach (var panel in panelPlacingPoints.Select(CreateNewSolarPanel))
             {
                 SolarPanels.Add(panel);
             }
-            
-            ResetMenuPanel();
+
+            SolarPanelData.ResetPanel();
         }
 
         private SolarPanel CreateNewSolarPanel(Point point)
@@ -70,8 +66,8 @@ namespace PVcase.ViewModels
             var panel = new SolarPanel()
             {
                 OriginPoint = new Point(point.X, point.Y),
-                Length = SolarPanel.Width,
-                Width = SolarPanel.Length
+                Length = SolarPanelData.Width,
+                Width = SolarPanelData.Length
             };
 
             return panel;
@@ -98,11 +94,11 @@ namespace PVcase.ViewModels
             set => _restrictionLines = value;
         }
 
-        private SolarPanel _solarPanel;
-        public SolarPanel SolarPanel
+        private SolarPanel _solarPanelData;
+        public SolarPanel SolarPanelData
         {
-            get => _solarPanel;
-            set => _solarPanel = value;
+            get => _solarPanelData;
+            set => _solarPanelData = value;
         }
 
         private List<Point> _siteZonePoints;
