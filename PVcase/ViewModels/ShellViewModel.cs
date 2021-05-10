@@ -43,11 +43,7 @@ namespace PVcase.ViewModels
 
         public void ResetMenuPanel()
         {
-            SolarPanel.Width = 0;
-            SolarPanel.Length = 0;
-            SolarPanel.ColumnSpacing = 0;
-            SolarPanel.RowSpacing = 0;
-            SolarPanel.TiltAngle = 0;
+            SolarPanel.ResetPanel();
         }
 
         public void DrawZones()

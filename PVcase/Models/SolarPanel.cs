@@ -74,5 +74,14 @@ namespace PVcase.Models
             ColumnSpacing = columnSpacing;
             TiltAngle = tiltAngle;
         }
+
+        public void ResetPanel()
+        {
+            this.Width = 0;
+            this.Length = 0;
+            this.ColumnSpacing = 0;
+            this.RowSpacing = 0;
+            this.TiltAngle = 0;
+        }
     }
 }
