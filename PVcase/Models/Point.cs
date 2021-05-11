@@ -19,6 +19,12 @@ namespace PVcase.Models
             Y = 0;
         }
 
+        public Point(Point point)
+        {
+            X = point.X;
+            Y = point.Y;
+        }
+
         public bool Equals(Point other)
         {
             return other != null && other.X == this.X && other.Y == this.Y;
