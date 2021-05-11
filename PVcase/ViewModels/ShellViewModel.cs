@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
 using PVcase.Models;
@@ -14,7 +13,8 @@ namespace PVcase.ViewModels
         private readonly FileReader _fileReader;
         private readonly ZoneCalculations _zoneCalculations;
 
-        private const int ScaleOnStartup = 2;
+        private const int ScaleOnStartupConst = 2;
+        private const string ErrorTextConst = "Bad values";
         public decimal MinScale => 0.1m;
         public decimal ScaleStep => 0.1m;
         public decimal MaxScale => 4m;
@@ -31,20 +31,57 @@ namespace PVcase.ViewModels
             SetScale();
         }
 
+        public bool CheckIfDataIsValid()
+        {
+            return FileDataIsValid() &&
+                   PanelDataIsValid();
+        }
+
+        private bool PanelDataIsValid()
+        {
+            return !(SolarPanelData.Width <= 0 ||
+                     SolarPanelData.Length <= 0 ||
+                     SolarPanelData.RowSpacing < 0 ||
+                     SolarPanelData.ColumnSpacing < 0 ||
+                     SolarPanelData.TiltAngle < 0 ||
+                     SolarPanelData.TiltAngle > 60);
+        }
+
+        private bool FileDataIsValid()
+        {
+            return (_siteZonePoints.Count <= 0 ||
+                _restrictionZonePoints.Count <= 0);
+        }
+
         public void SetScale()
         {
-            Scale = ScaleOnStartup;
+            Scale = ScaleOnStartupConst;
         }
 
         public void CreateMenuPanel()
         {
             SolarPanelData = new SolarPanel();
+            _siteZonePoints = new List<Point>();
+            _restrictionZonePoints = new List<Point>();
         }
 
         public void Generate()
         {
-            DrawZones();
-            DrawSolarPanels();
+            bool result = CheckIfDataIsValid();
+
+            if (result)
+            {
+                SetErrorText(result);
+                DrawZones();
+                DrawSolarPanels();
+            }
+            else
+                SetErrorText(result);
+        }
+
+        public void SetErrorText(bool isValid)
+        {
+            ErrorText = isValid ? string.Empty : ErrorTextConst;
         }
 
         public void OpenSiteFile()
@@ -129,6 +166,17 @@ namespace PVcase.ViewModels
             {
                 _scale = value;
                 NotifyOfPropertyChange(() => Scale);
+            }
+        }
+
+        private string _errorText;
+        public string ErrorText
+        {
+            get => _errorText;
+            set
+            {
+                _errorText = value;
+                NotifyOfPropertyChange(() => ErrorText);
             }
         }
 
