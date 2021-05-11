@@ -56,14 +56,15 @@ namespace UnitTests
         }
 
         [Test]
-        public void GetRange_InputEmptyPointList_ReturnsNull()
+        public void GetRange_InputEmptyPointList_ReturnsNewSiteCoordRange()
         {
             var zoneCalculations = new ZoneCalculations();
             var coordinatesList = new List<Point>();
+            var expected = zoneCalculations.NewRange();
 
             var result = zoneCalculations.GetRange(coordinatesList);
 
-            Assert.AreEqual(null, result);
+            Assert.AreEqual(expected, result);
         }
     }
 }
