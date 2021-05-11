@@ -34,8 +34,8 @@ namespace PVcase.Services
             return pointsForPanelPlacing;
         }
 
-      public List<Point> FindRowPlacingPoints(SolarPanel solarPanel, SiteCoordRange siteRange, List<Point> sitePoints,
-            List<Point> restrictionPoints)
+        public List<Point> FindRowPlacingPoints(SolarPanel solarPanel, SiteCoordRange siteRange, List<Point> sitePoints,
+              List<Point> restrictionPoints)
         {
             var rowPoints = new List<Point>();
 
@@ -53,8 +53,6 @@ namespace PVcase.Services
             return rowPoints;
         }
 
-
-
         public void GetTiltedPanelWidth(SolarPanel panel)
         {
             if (panel.TiltAngle == 0) return;
@@ -63,6 +61,7 @@ namespace PVcase.Services
             panel.Width *= Math.Abs(Math.Cos(radians));
 
         }
+
         public bool CanPanelFit(SolarPanel solarPanel, List<Point> sitePoints, List<Point> restrictionPoints)
         {
             var panelPoints = CreatePanelPoints(solarPanel);
