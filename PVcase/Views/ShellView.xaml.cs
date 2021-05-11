@@ -14,17 +14,9 @@ namespace PVcase.Views
             InitializeComponent();
         }
 
-        private void ValidateOnlyNumbers(object sender, TextCompositionEventArgs e)
+        private void ValidateOnlyDoubleTypeNumbers(object sender, TextCompositionEventArgs e)
         {
             e.Handled = _textParser.IsTextInt(e.Text);
-        }
-
-        private void LimitTiltAngle(object sender, TextCompositionEventArgs e)
-        {
-            string fullText = $"{((TextBox) sender).Text}{e.Text}";
-
-            e.Handled = _textParser.IsTextInt(e.Text);
-            e.Handled = !_textParser.IsInAngleLimit(fullText);
         }
     }
 }
