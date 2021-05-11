@@ -16,7 +16,7 @@ namespace PVcase.Services
             return FindPlacingPoints(solarPanel, siteCoordinationPoints, restrictionCoordinationPoints, siteRange);
         }
 
-        private List<Point> FindPlacingPoints(SolarPanel solarPanel, List<Point> sitePoints, List<Point> restrictionPoints, SiteCoordRange siteRange)
+        public List<Point> FindPlacingPoints(SolarPanel solarPanel, List<Point> sitePoints, List<Point> restrictionPoints, SiteCoordRange siteRange)
         {
             var pointsForPanelPlacing = new List<Point>();
 
@@ -93,7 +93,7 @@ namespace PVcase.Services
             return testPoints.Any(point => IsPointInside(polygonPoints, point));
         }
 
-        public static bool IsPointInside(List<Point> polygon, Point testPoint)
+        public bool IsPointInside(List<Point> polygon, Point testPoint)
         {
             bool result = false;
             int j = polygon.Count - 1;
@@ -112,13 +112,13 @@ namespace PVcase.Services
 
             return result;
         }
-        private static bool CheckIfPointIntersects(Point testPoint, Point currentPoint, Point previousPoint)
+        public bool CheckIfPointIntersects(Point testPoint, Point currentPoint, Point previousPoint)
         {
             return currentPoint.Y < testPoint.Y && previousPoint.Y >= testPoint.Y ||
                    previousPoint.Y < testPoint.Y && currentPoint.Y >= testPoint.Y;
         }
 
-        private static bool CheckIfPointIsOnTheRight(Point testPoint, Point currentPoint, Point previousPoint)
+        public bool CheckIfPointIsOnTheRight(Point testPoint, Point currentPoint, Point previousPoint)
         {
             double xPosition = currentPoint.X + (testPoint.Y - currentPoint.Y)
                 / (previousPoint.Y - currentPoint.Y)
