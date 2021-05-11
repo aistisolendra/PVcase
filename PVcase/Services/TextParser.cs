@@ -9,10 +9,5 @@ namespace PVcase.Services
         {
             return _onlyInt.IsMatch(text);
         }
-
-        public bool IsInAngleLimit(string text)
-        {
-            return int.TryParse(text, out int value) && value >= 0 && value <= 60;
-        }
     }
 }
