@@ -28,7 +28,7 @@ namespace PVcase.Services
                 pointsForPanelPlacing.AddRange(placingPointsInRow);
 
                 if (placingPointsInRow.Count > 0)
-                    yPoint += solarPanel.Width + solarPanel.RowSpacing;
+                    yPoint += solarPanel.Width + solarPanel.RowSpacing - 1;
             }
 
             return pointsForPanelPlacing;
@@ -46,7 +46,7 @@ namespace PVcase.Services
                 if (CanPanelFit(solarPanel, sitePoints, restrictionPoints))
                 {
                     rowPoints.Add(new Point(solarPanel.OriginPoint));
-                    xPoint += solarPanel.Length + solarPanel.ColumnSpacing;
+                    xPoint += solarPanel.Length + solarPanel.ColumnSpacing - 1;
                 }
             }
 
@@ -72,15 +72,33 @@ namespace PVcase.Services
 
         public List<Point> CreatePanelPoints(SolarPanel solarPanelData)
         {
-            var panelPoints = new List<Point>()
+            var panelPoints = new List<Point>();
+            panelPoints.AddRange(GetCornerPoints(solarPanelData));
+            panelPoints.AddRange(GetMiddlePoints(solarPanelData));
+
+            return panelPoints;
+        }
+
+        public List<Point> GetMiddlePoints(SolarPanel solarPanelData)
+        {
+            return new List<Point>
+            {
+                new Point(solarPanelData.OriginPoint.X + (solarPanelData.Length / 2), solarPanelData.OriginPoint.Y),
+                new Point(solarPanelData.OriginPoint.X, solarPanelData.OriginPoint.Y + (solarPanelData.Width / 2)),
+                new Point(solarPanelData.OriginPoint.X + solarPanelData.Length, solarPanelData.OriginPoint.Y + (solarPanelData.Width / 2)),
+                new Point(solarPanelData.OriginPoint.X + (solarPanelData.Length / 2), solarPanelData.OriginPoint.Y + solarPanelData.Width)
+            };
+        }
+
+        public List<Point> GetCornerPoints(SolarPanel solarPanelData)
+        {
+            return new List<Point>
             {
                 solarPanelData.OriginPoint,
                 new Point(solarPanelData.OriginPoint.X + solarPanelData.Length, solarPanelData.OriginPoint.Y),
                 new Point(solarPanelData.OriginPoint.X, solarPanelData.OriginPoint.Y + solarPanelData.Width),
                 new Point(solarPanelData.OriginPoint.X + solarPanelData.Length, solarPanelData.OriginPoint.Y + solarPanelData.Width)
             };
-
-            return panelPoints;
         }
 
         public bool IsAllPointsInside(List<Point> testPoints, List<Point> polygonPoints)
