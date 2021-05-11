@@ -246,7 +246,12 @@ namespace UnitTests
                 new Point(5,5),
                 new Point(15, 5),
                 new Point(5, 15),
-                new Point(15,15)
+                new Point(15,15),
+                new Point(10,5),
+                new Point(5,10),
+                new Point(15,10),
+                new Point(10,15)
+
             };
 
             var result = panelCalculations.CreatePanelPoints(testSolarPanel);
@@ -261,6 +266,10 @@ namespace UnitTests
             var testSolarPanel = new SolarPanel(0,0,0,0,0, new Point(0,0));
             var expected = new List<Point>()
             {
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0),
                 new Point(0,0),
                 new Point(0,0),
                 new Point(0,0),
@@ -369,5 +378,78 @@ namespace UnitTests
             Assert.AreEqual(9.84807753012208, testSolarPanel.Width);
         }
 
+        [Test]
+        public void GetCornerPoints_InputZeros_ReturnsNewPointList()
+        {
+            var panelCalculations = new PanelCalculations();
+            var testSolarPanel = new SolarPanel(0, 0, 0, 0, 0, new Point(0, 0));
+            var expected = new List<Point>()
+            {
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0)
+            };
+
+            var result = panelCalculations.GetCornerPoints(testSolarPanel);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void GetCornerPoints_InputsAreValid_ReturnsNewPointList()
+        {
+            var panelCalculations = new PanelCalculations();
+            var testSolarPanel = new SolarPanel(10, 10, 10,
+                10, 0, new Point(5, 5));
+            var expected = new List<Point>()
+            {
+                new Point(5,5),
+                new Point(15, 5),
+                new Point(5, 15),
+                new Point(15,15)
+            };
+
+            var result = panelCalculations.GetCornerPoints(testSolarPanel);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void GetMiddlePoints_InputZeros_ReturnsNewPointList()
+        {
+            var panelCalculations = new PanelCalculations();
+            var testSolarPanel = new SolarPanel(0, 0, 0, 0, 0, new Point(0, 0));
+            var expected = new List<Point>()
+            {
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0)
+            };
+
+            var result = panelCalculations.GetMiddlePoints(testSolarPanel);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void GetMiddlePoints_InputsAreValid_ReturnsNewPointList()
+        {
+            var panelCalculations = new PanelCalculations();
+            var testSolarPanel = new SolarPanel(10, 10, 10,
+                10, 0, new Point(5, 5));
+            var expected = new List<Point>()
+            {
+                new Point(10,5),
+                new Point(5,10),
+                new Point(15,10),
+                new Point(10,15)
+            };
+
+            var result = panelCalculations.GetMiddlePoints(testSolarPanel);
+
+            Assert.AreEqual(expected, result);
+        }
     }
 }
