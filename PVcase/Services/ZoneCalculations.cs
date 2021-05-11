@@ -9,7 +9,7 @@ namespace PVcase.Services
         public SiteCoordRange GetRange(List<Point> coordinates)
         {
             if (coordinates.Count == 0)
-                return null;
+                return NewRange();
 
             var siteCoords = new SiteCoordRange
             {
@@ -20,6 +20,17 @@ namespace PVcase.Services
             };
 
             return siteCoords;
+        }
+
+        public SiteCoordRange NewRange()
+        {
+            return new SiteCoordRange()
+            {
+                MaxY = 0,
+                MaxX = 0,
+                MinX = 0,
+                MinY = 0
+            };
         }
     }
 }
