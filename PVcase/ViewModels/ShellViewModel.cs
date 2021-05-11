@@ -49,7 +49,7 @@ namespace PVcase.ViewModels
 
         private bool FileDataIsValid()
         {
-            return (_siteZonePoints.Count <= 0 ||
+            return !(_siteZonePoints.Count <= 0 ||
                 _restrictionZonePoints.Count <= 0);
         }
 
