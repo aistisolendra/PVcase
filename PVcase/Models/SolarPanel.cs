@@ -1,8 +1,9 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 
 namespace PVcase.Models
 {
-    public class SolarPanel : PropertyChangedBase
+    public class SolarPanel : PropertyChangedBase, IEquatable<SolarPanel>
     {
         public Point OriginPoint { get; set; }
 
@@ -75,6 +76,17 @@ namespace PVcase.Models
             TiltAngle = tiltAngle;
         }
 
+        public SolarPanel(double width = 0, double length = 0, int rowSpacing = 0,
+            int columnSpacing = 0, int tiltAngle = 0, double x = 0, double y = 0)
+        {
+            OriginPoint = new Point(x,y);
+            Length = length;
+            Width = width;
+            RowSpacing = rowSpacing;
+            ColumnSpacing = columnSpacing;
+            TiltAngle = tiltAngle;
+        }
+
         public void ResetPanel()
         {
             this.Width = 0;
@@ -82,6 +94,17 @@ namespace PVcase.Models
             this.ColumnSpacing = 0;
             this.RowSpacing = 0;
             this.TiltAngle = 0;
+        }
+
+        public bool Equals(SolarPanel other)
+        {
+            return other != null &&
+                   this.Width == other.Width &&
+                   this.Length == other.Length &&
+                   this.ColumnSpacing == other.ColumnSpacing &&
+                   this.RowSpacing == other.RowSpacing &&
+                   this.TiltAngle == other.TiltAngle &&
+                   this.OriginPoint.Equals(other.OriginPoint);
         }
     }
 }
