@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
 using PVcase.Models;
@@ -12,6 +13,12 @@ namespace PVcase.ViewModels
         private readonly PanelCalculations _panelCalculations;
         private readonly FileReader _fileReader;
         private readonly ZoneCalculations _zoneCalculations;
+
+        private const int ScaleOnStartup = 2;
+        public decimal MinScale => 0.1m;
+        public decimal ScaleStep => 0.1m;
+        public decimal MaxScale => 4m;
+
         public ShellViewModel(Converter converter, PanelCalculations panelCalculations,
                               FileReader fileReader, ZoneCalculations zoneCalculations)
         {
@@ -21,6 +28,12 @@ namespace PVcase.ViewModels
             _zoneCalculations = zoneCalculations;
 
             CreateMenuPanel();
+            SetScale();
+        }
+
+        public void SetScale()
+        {
+            Scale = ScaleOnStartup;
         }
 
         public void CreateMenuPanel()
@@ -101,7 +114,22 @@ namespace PVcase.ViewModels
         public SolarPanel SolarPanelData
         {
             get => _solarPanelData;
-            set => _solarPanelData = value;
+            set
+            {
+                _solarPanelData = value;
+                NotifyOfPropertyChange(() => SolarPanelData);
+            }
+        }
+
+        private decimal _scale;
+        public decimal Scale
+        {
+            get => _scale;
+            set
+            {
+                _scale = value;
+                NotifyOfPropertyChange(() => Scale);
+            }
         }
 
         private List<Point> _siteZonePoints;

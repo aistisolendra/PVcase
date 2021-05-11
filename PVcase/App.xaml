@@ -5,10 +5,32 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-             <ResourceDictionary>
-                 <local:Bootstrapper x:Key="Bootstrapper"/>
-             </ResourceDictionary>
-         </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+                <ResourceDictionary>
+                    <local:Bootstrapper x:Key="Bootstrapper"/>
+                    <Style x:Key="MenuLabel" TargetType="{x:Type Label}">
+                        <Setter Property="FontFamily" Value="Arial"/>
+                        <Setter Property="Width" Value="100"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="VerticalAlignment" Value="Top"/>
+                        <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+                    </Style>
+                    <Style x:Key="MenuTextBox" TargetType="{x:Type TextBox}">
+                        <Setter Property="FontFamily" Value="Arial"/>
+                        <Setter Property="Width" Value="100"/>
+                        <Setter Property="Height" Value="20"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="VerticalAlignment" Value="Top"/>
+                    </Style>
+                    <Style x:Key="MenuButton" TargetType="{x:Type Button}">
+                        <Setter Property="FontFamily" Value="Arial"/>
+                        <Setter Property="Width" Value="100"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="VerticalAlignment" Value="Top"/>
+                        <Setter Property="Margin" Value="0,5,0,5"/>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
     </Application.Resources>
 </Application>
