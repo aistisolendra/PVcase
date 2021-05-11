@@ -60,7 +60,7 @@ namespace PVcase.ViewModels
 
         public void CreateMenuPanel()
         {
-            SolarPanelData = new SolarPanel();
+            SolarPanelData = new SolarPanel(0,0,0,0,0,0,0);
             _siteZonePoints = new List<Point>();
             _restrictionZonePoints = new List<Point>();
         }
@@ -116,12 +116,7 @@ namespace PVcase.ViewModels
 
         private SolarPanel CreateNewSolarPanel(Point point)
         {
-            var panel = new SolarPanel()
-            {
-                OriginPoint = new Point(point.X, point.Y),
-                Length = SolarPanelData.Width,
-                Width = SolarPanelData.Length
-            };
+            var panel = new SolarPanel(SolarPanelData.Length, SolarPanelData.Width, 0, 0, 0, point.X, point.Y);
 
             return panel;
         }
