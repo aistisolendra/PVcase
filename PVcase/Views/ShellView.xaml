@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PVcase.Views"
         mc:Ignorable="d"
-        Title="Solar Panel Park" Height="500" Width="800" Background="White">
+        Title="Solar Panel Park" Height="500" Width="800" Background="White"
+        MinHeight="460" MinWidth="600">
 
     <DockPanel>
         <!-- Menu -->
@@ -101,8 +101,8 @@
                       HorizontalScrollBarVisibility="Auto">
             <Grid>
                 <Grid.LayoutTransform>
-                    <ScaleTransform ScaleX="{Binding Scale}"
-                                    ScaleY="{Binding Scale}"/>
+                    <ScaleTransform ScaleX="{Binding Scale, Mode=TwoWay}"
+                                    ScaleY="{Binding Scale, Mode=TwoWay}"/>
                 </Grid.LayoutTransform>
 
                 <Grid VerticalAlignment="Center"
