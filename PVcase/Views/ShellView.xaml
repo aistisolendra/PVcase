@@ -25,8 +25,10 @@
                 <TextBox TextWrapping="Wrap"
                          Text="{Binding Path=Width, Mode=TwoWay}"
                          DataContext="{Binding Path=SolarPanelData}"
+                         Style="{StaticResource MenuTextBox}"
                          PreviewTextInput="ValidateOnlyDoubleTypeNumbers"
-                         Style="{StaticResource MenuTextBox}"/>
+                         GotFocus="TextBox_GotFocus"
+                         LostFocus="TextBox_LostFocus"/>
 
                 <Label x:Name="Length"
                        Content="Length"
@@ -35,8 +37,10 @@
                 <TextBox TextWrapping="Wrap"
                          Text="{Binding Path=Length, Mode=TwoWay}"
                          DataContext="{Binding Path=SolarPanelData}"
+                         Style="{StaticResource MenuTextBox}"
                          PreviewTextInput="ValidateOnlyDoubleTypeNumbers"
-                         Style="{StaticResource MenuTextBox}"/>
+                         GotFocus="TextBox_GotFocus"
+                         LostFocus="TextBox_LostFocus"/>
 
                 <Label x:Name="RowSpacing"
                        Content="Row spacing"
@@ -45,8 +49,10 @@
                 <TextBox TextWrapping="Wrap"
                          Text="{Binding Path=RowSpacing, Mode=TwoWay}"
                          DataContext="{Binding Path=SolarPanelData}"
+                         Style="{StaticResource MenuTextBox}"
                          PreviewTextInput="ValidateOnlyDoubleTypeNumbers"
-                         Style="{StaticResource MenuTextBox}"/>
+                         GotFocus="TextBox_GotFocus"
+                         LostFocus="TextBox_LostFocus"/>
 
                 <Label x:Name="ColumnSpacing"
                        Content="Column spacing"
@@ -55,8 +61,10 @@
                 <TextBox TextWrapping="Wrap"
                          Text="{Binding Path=ColumnSpacing, Mode=TwoWay}"
                          DataContext="{Binding Path=SolarPanelData}"
+                         Style="{StaticResource MenuTextBox}"
                          PreviewTextInput="ValidateOnlyDoubleTypeNumbers"
-                         Style="{StaticResource MenuTextBox}"/>
+                         GotFocus="TextBox_GotFocus"
+                         LostFocus="TextBox_LostFocus"/>
 
                 <Label x:Name="TiltAngle"
                        Content="Tilt angle"
@@ -65,8 +73,10 @@
                 <TextBox TextWrapping="Wrap"
                          Text="{Binding Path=TiltAngle, Mode=TwoWay}"
                          DataContext="{Binding Path=SolarPanelData}"
+                         Style="{StaticResource MenuTextBox}"
                          PreviewTextInput="ValidateOnlyDoubleTypeNumbers"
-                         Style="{StaticResource MenuTextBox}"/>
+                         GotFocus="TextBox_GotFocus"
+                         LostFocus="TextBox_LostFocus"/>
 
                 <Button x:Name="Generate"
                         Content="Generate"

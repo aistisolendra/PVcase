@@ -18,5 +18,17 @@ namespace PVcase.Views
         {
             e.Handled = _textParser.IsTextInt(e.Text);
         }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox && textBox.Text == "0")
+                textBox.Text = "";
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox && textBox.Text == "")
+                textBox.Text = "0";
+        }
     }
 }
