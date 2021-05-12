@@ -89,7 +89,7 @@
                         Style="{StaticResource MenuButton}"/>
 
                 <Button x:Name="OpenRestrictionFile"
-                        Content="Restriction Files"
+                        Content="Restriction File"
                         Height="20"
                         Style="{StaticResource MenuButton}"/>
 
